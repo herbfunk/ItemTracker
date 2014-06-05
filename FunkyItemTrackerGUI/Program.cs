@@ -8,6 +8,7 @@ namespace FunkyItemTrackerGUI
 {
 	static class Program
 	{
+		
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
@@ -16,7 +17,8 @@ namespace FunkyItemTrackerGUI
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
+			Form1.thisForm = new Form1();
+			Application.Run(Form1.thisForm);
 		}
 	}
 }

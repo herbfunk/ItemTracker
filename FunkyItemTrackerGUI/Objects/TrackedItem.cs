@@ -121,7 +121,7 @@ namespace FunkyItemTrackerGUI.Objects
 					return "demonorgan.png";
 			}
 
-			return String.Empty;
+			return "demonorgan.png";
 		}
 
 		public Brush GetBrushColor()

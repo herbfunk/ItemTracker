@@ -14,24 +14,49 @@ namespace FunkyItemTrackerGUI
 {
 	public partial class InventoryControl : UserControl
 	{
-		private readonly int ColumnCount, RowCount;
+		private readonly int ColumnCount, RowCount, IndexReduction;
 		private List<TrackedItem> Items;
 		private Dictionary<int, TrackedItem> ItemInventory=new Dictionary<int, TrackedItem>();
-		private int width_size;
-		private int height_size;
+		private int width_size
+		{
+			get
+			{
+				return Width / ColumnCount;
+			}
+		}
+		private int height_size
+		{
+			get
+			{
+				return Height / RowCount;
+			}
+		}
+		private int row_reduction
+		{
+			get
+			{
+				return IndexReduction * 10;
+			}
+		}
 		private List<Rectangle> HighlightedSquares = new List<Rectangle>();
  
-		public InventoryControl(List<TrackedItem> items, int colCount, int rowCount)
+		public InventoryControl(List<TrackedItem> items, int colCount, int rowCount, int indexReduction=0)
 		{
+			Dock = DockStyle.Fill;
 			InitializeComponent();
 
 			ColumnCount = colCount;
 			RowCount = rowCount;
-			Items = new List<TrackedItem>(items);
-			foreach (var item in Items)
+			IndexReduction = indexReduction;
+
+			Items = new List<TrackedItem>();
+			foreach (var item in items)
 			{
-				ItemInventory.Add((item.invRow * 10) + item.invCol, item);
-				if (item.DetermineIsTwoSlot()) ItemInventory.Add(((item.invRow+1) * 10) + item.invCol, item);
+				if (item.invRow - row_reduction > rowCount) continue;
+
+				ItemInventory.Add(((item.invRow - row_reduction) * 10) + item.invCol, item);
+				if (item.DetermineIsTwoSlot()) ItemInventory.Add((((item.invRow - row_reduction) + 1) * 10) + item.invCol, item);
+				Items.Add(item);
 			}
 		}
 
@@ -41,9 +66,6 @@ namespace FunkyItemTrackerGUI
 
 			string pathloc = Paths.RootDirectory;
 			Bitmap bpInvSquare = new Bitmap(Path.Combine(pathloc, "Images", "InvSquare.png"));
-
-			width_size =  Width / ColumnCount;
-			height_size =  Height / RowCount;
 
 			Graphics g = e.Graphics;
 
@@ -64,7 +86,7 @@ namespace FunkyItemTrackerGUI
 
 				bool istwoslot = item.DetermineIsTwoSlot();
 
-				g.DrawImage(bpItemIcon, item.invCol * width_size, item.invRow * height_size, width_size, istwoslot ? height_size * 2 : height_size);
+				g.DrawImage(bpItemIcon, item.invCol * width_size, (item.invRow - row_reduction) * height_size, width_size, istwoslot ? height_size * 2 : height_size);
 			}
 
 			//Draw Highlighted Squares
@@ -112,11 +134,14 @@ namespace FunkyItemTrackerGUI
 
 				//Add new Rectangle to Highlighted Collection
 				TrackedItem item=ItemInventory[index];
-				Rectangle r = new Rectangle(item.invCol * width_size, item.invRow * height_size, width_size, item.DetermineIsTwoSlot() ? height_size * 2 : height_size);
+				Rectangle r = new Rectangle(item.invCol * width_size, (item.invRow - row_reduction) * height_size, width_size, item.DetermineIsTwoSlot() ? height_size * 2 : height_size);
 				HighlightedSquares.Add(r);
 
 				//Raise Event!
 				if (OnItemSelected != null) OnItemSelected(item);
+
+				Form1.selectedItem = item;
+				Form1.thisForm.panel_ItemInfo.Invalidate();
 
 				//Invalidate (force repaint)
 				Invalidate();

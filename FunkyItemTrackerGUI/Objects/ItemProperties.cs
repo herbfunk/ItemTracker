@@ -6,58 +6,99 @@ namespace FunkyItemTrackerGUI.Objects
 {
 	public class ItemProperties
 	{
-		public List<string> GetStatStrings()
+		public List<string> GetPrimaryStatStrings()
 		{
 			List<string> retList = new List<string>();
-			if (Dexterity > 0) retList.Add(String.Format("Dexterity {0}", Dexterity));
-			if (Intelligence > 0) retList.Add(String.Format("Intelligence {0}", Intelligence));
-			if (Strength > 0) retList.Add(String.Format("Strength {0}", Strength));
-			if (Vitality > 0) retList.Add(String.Format("Vitality {0}", Vitality));
-			if (ResistAll > 0) retList.Add(String.Format("ResistAll {0}", ResistAll));
-			if (LifePercent > 0) retList.Add(String.Format("LifePercent {0}", LifePercent));
-			if (LifeOnHit > 0) retList.Add(String.Format("LifeOnHit {0}", LifeOnHit));
-			if (LifeSteal > 0) retList.Add(String.Format("LifeSteal {0}", LifeSteal));
-			if (HealthPerSpiritSpent > 0) retList.Add(String.Format("HealthPerSpiritSpent {0}", HealthPerSpiritSpent));
-			if (HealthPerSecond > 0) retList.Add(String.Format("HealthPerSecond {0}", HealthPerSecond));
-			if (MovementSpeed > 0) retList.Add(String.Format("MovementSpeed {0}", MovementSpeed));
-			if (Sockets > 0) retList.Add(String.Format("Sockets {0}", Sockets));
-			if (CritPercent > 0) retList.Add(String.Format("CritPercent {0}", CritPercent));
-			if (CritDamagePercent > 0) retList.Add(String.Format("CritDamagePercent {0}", CritDamagePercent));
-			if (MinDamage > 0) retList.Add(String.Format("MinDamage {0}", MinDamage));
-			if (MaxDamage > 0) retList.Add(String.Format("MaxDamage {0}", MaxDamage));
-			if (AttackSpeedPercent > 0) retList.Add(String.Format("AttackSpeedPercent {0}", AttackSpeedPercent));
-			if (AttackSpeedPercentBonus > 0) retList.Add(String.Format("AttackSpeedPercentBonus {0}", AttackSpeedPercentBonus));
-			if (BlockChanceBonus > 0) retList.Add(String.Format("BlockChanceBonus {0}", BlockChanceBonus));
-			if (MaxDiscipline > 0) retList.Add(String.Format("MaxDiscipline {0}", MaxDiscipline));
-			if (MaxMana > 0) retList.Add(String.Format("MaxMana {0}", MaxMana));
-			if (MaxArcanePower > 0) retList.Add(String.Format("MaxArcanePower {0}", MaxArcanePower));
-			if (MaxFury > 0) retList.Add(String.Format("MaxFury {0}", MaxFury));
-			if (MaxSpirit > 0) retList.Add(String.Format("MaxSpirit {0}", MaxSpirit));
-			if (ArcaneOnCrit > 0) retList.Add(String.Format("ArcaneOnCrit {0}", ArcaneOnCrit));
-			if (ManaRegen > 0) retList.Add(String.Format("ManaRegen {0}", ManaRegen));
-			if (SpiritRegen > 0) retList.Add(String.Format("SpiritRegen {0}", SpiritRegen));
-			if (HatredRegen > 0) retList.Add(String.Format("HatredRegen {0}", HatredRegen));
-			if (ArmorBonus > 0) retList.Add(String.Format("ArmorBonus {0}", ArmorBonus));
+			if (Dexterity > 0) retList.Add(String.Format("+{0} Dexterity", Dexterity));
+			if (Intelligence > 0) retList.Add(String.Format("+{0} Intelligence", Intelligence));
+			if (Strength > 0) retList.Add(String.Format("+{0} Strength", Strength));
+			if (Vitality > 0) retList.Add(String.Format("+{0} Vitality", Vitality));
+			if (ResistAll > 0) retList.Add(String.Format("+{0} Resistance to All Elements", ResistAll));
+			if (LifePercent > 0) retList.Add(String.Format("+{0}% Life", LifePercent));
+			if (LifeOnHit > 0) retList.Add(String.Format("+{0} Life per Hit", LifeOnHit));
+			if (LifeSteal > 0) retList.Add(String.Format("Life Steal {0}%", LifeSteal));
+			if (HealthPerSpiritSpent > 0) retList.Add(String.Format("Health Per Spirit Spent {0}", HealthPerSpiritSpent));
+			if (HealthPerSecond > 0) retList.Add(String.Format("Regenerates {0} Life per Second", HealthPerSecond));
+			if (MovementSpeed > 0) retList.Add(String.Format("+{0}% Movement Speed", MovementSpeed));
+			if (Sockets > 0) retList.Add(String.Format("{0} Sockets", Sockets));
+			if (CritPercent > 0) retList.Add(String.Format("Critical Hit Chance Increased by {0}%", CritPercent));
+			if (CritDamagePercent > 0) retList.Add(String.Format("Critical Hit Damage Increased by {0}%", CritDamagePercent));
 
-			if (ResistArcane > 0) retList.Add(String.Format("ResistArcane {0}", ResistArcane));
-			if (ResistCold > 0) retList.Add(String.Format("ResistCold {0}", ResistCold));
-			if (ResistFire > 0) retList.Add(String.Format("ResistFire {0}", ResistFire));
-			if (ResistHoly > 0) retList.Add(String.Format("ResistHoly {0}", ResistHoly));
-			if (ResistLightning > 0) retList.Add(String.Format("ResistLightning {0}", ResistLightning));
-			if (ResistPhysical > 0) retList.Add(String.Format("ResistPhysical {0}", ResistPhysical));
-			if (ResistPoison > 0) retList.Add(String.Format("ResistPoison {0}", ResistPoison));
+			if (MinDamage > 0)
+			{
+				//if (MaxDamage > 0) retList.Add(String.Format("MaxDamage {0}", MaxDamage));
+				string s = String.Format("+{0}-{1} Damage", MinDamage, MaxDamage);
+				retList.Add(s);
+			}
 
-			if (ExperienceBonus > 0) retList.Add(String.Format("ExperienceBonus {0}", ExperienceBonus));
-			if (GlobeBonus > 0) retList.Add(String.Format("GlobeBonus {0}", GlobeBonus));
-			if (ItemLevelRequirementReduction > 0) retList.Add(String.Format("ItemLevelRequirementReduction {0}", ItemLevelRequirementReduction));
-			if (MagicFind > 0) retList.Add(String.Format("MagicFind {0}", MagicFind));
-			if (GoldFind > 0) retList.Add(String.Format("GoldFind {0}", GoldFind));
-			if (Thorns > 0) retList.Add(String.Format("Thorns {0}", Thorns));
-			if (PickUpRadius > 0) retList.Add(String.Format("PickUpRadius {0}", PickUpRadius));
-			if (LifeOnKill > 0) retList.Add(String.Format("LifeOnKill {0}", LifeOnKill));
+			
+
+			if (AttackSpeedPercent > 0) retList.Add(String.Format("Attack Speed Increased by {0}%", AttackSpeedPercent));
+			if (AttackSpeedPercentBonus > 0) retList.Add(String.Format("Increases Attack Speed by {0}%", AttackSpeedPercentBonus));
+			if (BlockChanceBonus > 0) retList.Add(String.Format("+{0}% Chance to Block", BlockChanceBonus));
+			if (OnHitAreaDamageProcChance > 0) retList.Add(String.Format("Chance to Deal {0}% Area Damage on Hit", OnHitAreaDamageProcChance));
+			if (PowerCooldownReductionPercent > 0) retList.Add(String.Format("Reduces cooldown of all skills by {0}%", PowerCooldownReductionPercent));
+			if (ResourceCostReductionPercent > 0) retList.Add(String.Format("ResourceCostReductionPercent {0}", ResourceCostReductionPercent));
+			//
+			
+
+			if (ArcaneOnCrit > 0) retList.Add(String.Format("Critical hits grant {0} Arcane Power (Wizard Only)", ArcaneOnCrit));
+			if (ManaRegen > 0) retList.Add(String.Format("Increases Mana Regeneration by {0} per Second", ManaRegen));
+			if (SpiritRegen > 0) retList.Add(String.Format("Increases Spirit Regeneration by {0} per Second", SpiritRegen));
+			if (HatredRegen > 0) retList.Add(String.Format("Increases Hatred Regeneration by {0} per second", HatredRegen));
+			if (ArmorBonus > 0) retList.Add(String.Format("+{0} Armor", ArmorBonus));
+			if (WeaponDamagePercent > 0) retList.Add(String.Format("WeaponDamagePercent {0}", WeaponDamagePercent));
+			
 
 			return retList;
 		}
+
+		public List<string> GetSecondaryStatStrings()
+		{
+			List<string> retList = new List<string>();
+			if (MaxDiscipline > 0) retList.Add(String.Format("+{0} Maximum Discipline", MaxDiscipline));
+			if (MaxMana > 0) retList.Add(String.Format("+{0} Maximum Mana", MaxMana));
+			if (MaxArcanePower > 0) retList.Add(String.Format("+{0} Maximum Arcane Power", MaxArcanePower));
+			if (MaxFury > 0) retList.Add(String.Format("+{0} Maximum Fury", MaxFury));
+			if (MaxSpirit > 0) retList.Add(String.Format("+{0} Maximum Spirit", MaxSpirit));
+
+			if (ResistArcane > 0) retList.Add(String.Format("+{0} Arcane Resistance", ResistArcane));
+			if (ResistCold > 0) retList.Add(String.Format("+{0} Cold Resistance", ResistCold));
+			if (ResistFire > 0) retList.Add(String.Format("+{0} Fire Resistance", ResistFire));
+			if (ResistHoly > 0) retList.Add(String.Format("+{0} Holy Resistance", ResistHoly));
+			if (ResistLightning > 0) retList.Add(String.Format("+{0} Lightning Resistance", ResistLightning));
+			if (ResistPhysical > 0) retList.Add(String.Format("+{0} Physical Resistance", ResistPhysical));
+			if (ResistPoison > 0) retList.Add(String.Format("+{0} Poison Resistance", ResistPoison));
+
+			if (ExperienceBonus > 0) retList.Add(String.Format("Monster kills grant +{0} Experience", ExperienceBonus));
+			if (GlobeBonus > 0) retList.Add(String.Format("Health Globes and Potions Grant +{0} Life", GlobeBonus));
+			if (ItemLevelRequirementReduction > 0) retList.Add(String.Format("Level Requirment Reduced by {0}", ItemLevelRequirementReduction));
+			if (MagicFind > 0) retList.Add(String.Format("MagicFind {0}", MagicFind));
+			if (GoldFind > 0) retList.Add(String.Format("+{0}% Extra Gold from Monsters", GoldFind));
+			if (Thorns > 0) retList.Add(String.Format("Ranged and Melee Attackers take {0} damage per hit.", Thorns));
+			if (PickUpRadius > 0) retList.Add(String.Format("Increases Gold and Health Pickup by {0} Yards", PickUpRadius));
+			if (LifeOnKill > 0) retList.Add(String.Format("+{0} Life after Each Kill", LifeOnKill));
+
+			if (WeaponOnHitFearProcChance > 0) retList.Add(String.Format("{0}% Chance to Fear on Hit", WeaponOnHitFearProcChance));
+			if (WeaponOnHitBlindProcChance > 0) retList.Add(String.Format("{0}% Chance to Blind on Hit", WeaponOnHitBlindProcChance));
+			if (WeaponOnHitFreezeProcChance > 0) retList.Add(String.Format("{0}% Chance to Freeze on Hit", WeaponOnHitFreezeProcChance));
+			if (WeaponOnHitChillProcChance > 0) retList.Add(String.Format("{0}% Chance to Chill on Hit", WeaponOnHitChillProcChance));
+			if (WeaponOnHitImmobilizeProcChance > 0) retList.Add(String.Format("{0}% Chance to Immobilize on Hit", WeaponOnHitImmobilizeProcChance));
+			if (WeaponOnHitKnockbackProcChance > 0) retList.Add(String.Format("{0}% Chance to Knockback on Hit", WeaponOnHitKnockbackProcChance));
+			if (WeaponOnHitSlowProcChance > 0) retList.Add(String.Format("{0}% Chance to Slow on Hit", WeaponOnHitSlowProcChance));
+			if (WeaponOnHitBleedProcChance > 0) retList.Add(String.Format("WeaponOnHitBleedProcChance", WeaponOnHitBleedProcChance));
+
+			return retList;
+		}
+
+		public float WeaponOnHitFearProcChance { get; set; }
+		public float WeaponOnHitBlindProcChance { get; set; }
+		public float WeaponOnHitFreezeProcChance { get; set; }
+		public float WeaponOnHitChillProcChance { get; set; }
+		public float WeaponOnHitImmobilizeProcChance { get; set; }
+		public float WeaponOnHitKnockbackProcChance { get; set; }
+		public float WeaponOnHitSlowProcChance { get; set; }
+		public float WeaponOnHitBleedProcChance { get; set; }
 
 		public float ResistArcane { get; set; }
 		public float ResistCold { get; set; }
@@ -75,6 +116,9 @@ namespace FunkyItemTrackerGUI.Objects
 		public float Thorns { get; set; }
 		public float PickUpRadius { get; set; }
 		public float LifeOnKill { get; set; }
+
+
+
 
 		public float MaxDiscipline { get; set; }
 		public float MaxMana { get; set; }
@@ -112,14 +156,7 @@ namespace FunkyItemTrackerGUI.Objects
 		public float DamagePercentBonusVsElites { get; set; }
 
 
-		public float WeaponOnHitFearProcChance { get; set; }
-		public float WeaponOnHitBlindProcChance { get; set; }
-		public float WeaponOnHitFreezeProcChance { get; set; }
-		public float WeaponOnHitChillProcChance { get; set; }
-		public float WeaponOnHitImmobilizeProcChance { get; set; }
-		public float WeaponOnHitKnockbackProcChance { get; set; }
-		public float WeaponOnHitSlowProcChance { get; set; }
-		public float WeaponOnHitBleedProcChance { get; set; }
+
 
 
 		public float MaxDamageFire { get; set; }

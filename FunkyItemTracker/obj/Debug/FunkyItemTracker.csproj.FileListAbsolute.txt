@@ -12,3 +12,5 @@ C:\Users\mault\Documents\GitHub\New\FunkyItemTracker\obj\Debug\FunkyItemTracker.
 C:\Users\mault\Documents\GitHub\New\FunkyItemTracker\obj\Debug\FunkyItemTracker.pdb
 C:\Users\mault\Documents\GitHub\ItemTracker\FunkyItemTracker\obj\Debug\FunkyItemTracker.dll
 C:\Users\mault\Documents\GitHub\ItemTracker\FunkyItemTracker\obj\Debug\FunkyItemTracker.pdb
+C:\Users\mault\Documents\GitHub\FunkyItemTracker\FunkyItemTracker\obj\Debug\FunkyItemTracker.dll
+C:\Users\mault\Documents\GitHub\FunkyItemTracker\FunkyItemTracker\obj\Debug\FunkyItemTracker.pdb

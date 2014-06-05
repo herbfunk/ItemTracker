@@ -83,24 +83,20 @@
     <Compile Include="InventoryControl.Designer.cs">
       <DependentUpon>InventoryControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Account.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Objects\Character.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Objects\CurrentAccountDetails.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Objects\ItemProperties.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Objects\TrackedItem.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Objects\Account.cs" />
+    <Compile Include="Objects\Character.cs" />
+    <Compile Include="Objects\CurrentAccountDetails.cs" />
+    <Compile Include="Objects\ItemProperties.cs" />
+    <Compile Include="Objects\TrackedItem.cs" />
     <Compile Include="Paths.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StashContainerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StashContainerControl.Designer.cs">
+      <DependentUpon>StashContainerControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CharacterSlot.resx">
       <DependentUpon>CharacterSlot.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +116,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="StashContainerControl.resx">
+      <DependentUpon>StashContainerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -175,7 +174,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Images\StashButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Images\Items\amulet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
