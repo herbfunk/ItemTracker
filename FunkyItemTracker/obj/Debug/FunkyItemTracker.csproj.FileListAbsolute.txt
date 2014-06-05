@@ -1,0 +1,14 @@
+C:\Users\mault\Desktop\db_beta\Plugins\FunkyItemTracker\FolderPaths.cs
+C:\Users\mault\Desktop\db_beta\Plugins\FunkyItemTracker\Objects\CurrentAccountDetails.cs
+C:\Users\mault\Desktop\db_beta\Plugins\FunkyItemTracker\Objects\ItemProperties.cs
+C:\Users\mault\Desktop\db_beta\Plugins\FunkyItemTracker\Objects\Account.cs
+C:\Users\mault\Desktop\db_beta\Plugins\FunkyItemTracker\Objects\Character.cs
+C:\Users\mault\Desktop\db_beta\Plugins\FunkyItemTracker\TabUI.cs
+C:\Users\mault\Desktop\db_beta\Plugins\FunkyItemTracker\Objects\TrackedItem.cs
+C:\Users\mault\Desktop\db_beta\Plugins\FunkyItemTracker\Plugin.cs
+C:\Users\mault\Desktop\db_beta\Plugins\FunkyItemTracker\FunkyItemTracker.dll
+C:\Users\mault\Desktop\db_beta\Plugins\FunkyItemTracker\FunkyItemTracker.pdb
+C:\Users\mault\Documents\GitHub\New\FunkyItemTracker\obj\Debug\FunkyItemTracker.dll
+C:\Users\mault\Documents\GitHub\New\FunkyItemTracker\obj\Debug\FunkyItemTracker.pdb
+C:\Users\mault\Documents\GitHub\ItemTracker\FunkyItemTracker\obj\Debug\FunkyItemTracker.dll
+C:\Users\mault\Documents\GitHub\ItemTracker\FunkyItemTracker\obj\Debug\FunkyItemTracker.pdb
