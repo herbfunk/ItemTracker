@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using FunkyItemTrackerGUI.Objects;
+using FunkyItemTracker.Objects;
 
-namespace FunkyItemTrackerGUI
+namespace FunkyItemTracker.ItemTrackerGUI.Controls
 {
 	public partial class StashContainerControl : UserControl
 	{
+		public delegate void ItemSelected(TrackedItem i);
+		public event InventoryControl.ItemSelected OnItemSelected;
+		private void ItemSelectedHandler(TrackedItem i)
+		{
+			if (OnItemSelected != null) OnItemSelected(i);
+		}
+
 		private readonly Dictionary<int, List<TrackedItem>> StashItems;  
 		public StashContainerControl(List<TrackedItem> Items)
 		{
-			this.Dock = DockStyle.Fill;
 			InitializeComponent();
 			StashItems = new Dictionary<int, List<TrackedItem>>();
 
@@ -58,14 +58,12 @@ namespace FunkyItemTrackerGUI
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
-			
-			
 		}
 
 		private void panel_StashButtons_Paint(object sender, PaintEventArgs e)
 		{
 			base.OnPaint(e);
-			string pathloc = Paths.RootDirectory;
+			string pathloc = FolderPaths.ItemTrackerPluginGUIFolderPath;
 			Bitmap bpStashButton = new Bitmap(Path.Combine(pathloc, "Images", "StashButton.png"));
 			int _height = panel_StashButtons.Height / 4;
 
@@ -85,6 +83,7 @@ namespace FunkyItemTrackerGUI
 
 			panel_Items.Controls.Clear();
 			InventoryControl newInv=new InventoryControl(StashItems[index], 7, 10, index);
+			newInv.OnItemSelected += ItemSelectedHandler;
 			panel_Items.Controls.Add(newInv);
 		}
 	}

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace FunkyItemTrackerGUI
+namespace FunkyItemTrackerGUI.Controls
 {
 	partial class InventoryControl
 	{
@@ -30,7 +30,25 @@ namespace FunkyItemTrackerGUI
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
+			this.itemMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.copyItemStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.itemMenu.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// itemMenu
+			// 
+			this.itemMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyItemStringToolStripMenuItem});
+			this.itemMenu.Name = "itemMenu";
+			this.itemMenu.Size = new System.Drawing.Size(156, 48);
+			// 
+			// copyItemStringToolStripMenuItem
+			// 
+			this.copyItemStringToolStripMenuItem.Name = "copyItemStringToolStripMenuItem";
+			this.copyItemStringToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.copyItemStringToolStripMenuItem.Text = "Copy Item String";
+			this.copyItemStringToolStripMenuItem.Click += new System.EventHandler(this.copyItemStringToolStripMenuItem_Click);
 			// 
 			// InventoryControl
 			// 
@@ -41,14 +59,18 @@ namespace FunkyItemTrackerGUI
 			this.BackColor = System.Drawing.Color.White;
 			this.DoubleBuffered = true;
 			this.Name = "InventoryControl";
-			this.Size = new System.Drawing.Size(1536, 666);
+			this.Size = new System.Drawing.Size(0, 24);
 			this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.InventoryControl_MouseClick);
 			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.InventoryControl_MouseMove);
+			this.itemMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
 
+		private ContextMenuStrip itemMenu;
+
 		#endregion
+		private ToolStripMenuItem copyItemStringToolStripMenuItem;
 
 	}
 }

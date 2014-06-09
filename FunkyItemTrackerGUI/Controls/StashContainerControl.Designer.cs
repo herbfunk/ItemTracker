@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace FunkyItemTrackerGUI
+namespace FunkyItemTrackerGUI.Controls
 {
 	partial class StashContainerControl
 	{

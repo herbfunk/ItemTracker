@@ -26,6 +26,9 @@ namespace FunkyItemTrackerGUI.Objects
 			StashedItems = new List<TrackedItem>();
 		}
 
+
+
+
 		public static void SerializeToXML(Account settings, string path)
 		{
 			XmlSerializer serializer = new XmlSerializer(typeof(Account));

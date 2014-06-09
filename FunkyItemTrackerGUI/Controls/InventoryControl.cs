@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FunkyItemTrackerGUI.Objects;
 
-namespace FunkyItemTrackerGUI
+namespace FunkyItemTrackerGUI.Controls
 {
 	public partial class InventoryControl : UserControl
 	{
@@ -92,7 +86,7 @@ namespace FunkyItemTrackerGUI
 			//Draw Highlighted Squares
 			foreach (var r in HighlightedSquares)
 			{
-				using (Pen borderPen = new Pen(Brushes.SteelBlue, 2))
+				using (Pen borderPen = new Pen(Brushes.WhiteSmoke, 2))
 				{
 					g.DrawRectangle(borderPen, r);
 				}
@@ -116,9 +110,10 @@ namespace FunkyItemTrackerGUI
 				//MessageBox.Show(ItemInventory[index].Name);
 			}
 		}
+
 		public delegate void ItemSelected(TrackedItem i);
 		public event ItemSelected OnItemSelected;
-
+		private TrackedItem LastSelectedItem = null;
 		private void InventoryControl_MouseClick(object sender, MouseEventArgs e)
 		{
 			int row = e.Y / height_size;
@@ -129,22 +124,37 @@ namespace FunkyItemTrackerGUI
 			int index = (row * 10) + col;
 			if (ItemInventory.ContainsKey(index))
 			{
-				//Clear our Highlighted Rectangles
-				HighlightedSquares.Clear();
+				TrackedItem item = ItemInventory[index];
+				if (LastSelectedItem==null || item!=LastSelectedItem)
+				{
+					LastSelectedItem = item;
 
-				//Add new Rectangle to Highlighted Collection
-				TrackedItem item=ItemInventory[index];
-				Rectangle r = new Rectangle(item.invCol * width_size, (item.invRow - row_reduction) * height_size, width_size, item.DetermineIsTwoSlot() ? height_size * 2 : height_size);
-				HighlightedSquares.Add(r);
+					//Clear our Highlighted Rectangles
+					HighlightedSquares.Clear();
 
-				//Raise Event!
-				if (OnItemSelected != null) OnItemSelected(item);
+					//Add new Rectangle to Highlighted Collection
+					Rectangle r = new Rectangle(item.invCol * width_size, (item.invRow - row_reduction) * height_size, width_size, item.DetermineIsTwoSlot() ? height_size * 2 : height_size);
+					HighlightedSquares.Add(r);
 
-				Form1.selectedItem = item;
-				Form1.thisForm.panel_ItemInfo.Invalidate();
+					//Raise Event!
+					if (OnItemSelected != null) OnItemSelected(item);
 
-				//Invalidate (force repaint)
-				Invalidate();
+					//Invalidate (force repaint)
+					Invalidate();
+				}
+
+				
+
+				if (e.Button == MouseButtons.Right)
+					itemMenu.Show(MousePosition);
+			}
+		}
+
+		private void copyItemStringToolStripMenuItem_Click(object sender, System.EventArgs e)
+		{
+			if (LastSelectedItem!=null)
+			{
+				Clipboard.SetText(LastSelectedItem.ReturnItemString());
 			}
 		}
 	}

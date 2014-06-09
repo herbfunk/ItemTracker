@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using FunkyItemTrackerGUI.Enums;
-using FunkyItemTrackerGUI.Objects;
+using FunkyItemTracker.Objects;
 
-namespace FunkyItemTrackerGUI
+namespace FunkyItemTracker.ItemTrackerGUI.Controls
 {
 	public partial class CharacterSlot : UserControl
 	{
+		protected bool Equals(CharacterSlot other)
+		{
+			return Equals(OChar, other.OChar);
+		}
+
+		public override int GetHashCode()
+		{
+			return (OChar != null ? OChar.GetHashCode() : 0);
+		}
+
 		internal readonly Character OChar;
+		internal bool IsHighlighted = false;
 
 		public CharacterSlot(Character c)
 		{
@@ -25,7 +28,7 @@ namespace FunkyItemTrackerGUI
 			OChar = c;
 			lbl_Name.Text = c.Name;
 
-			string pathloc = Paths.RootDirectory;
+			string pathloc = FolderPaths.ItemTrackerPluginGUIFolderPath;
 			string iconname = c.GetImageIcon();
 
 			try
@@ -48,8 +51,7 @@ namespace FunkyItemTrackerGUI
 			Focus();
 			BackColor = Color.SteelBlue;
 
-			if (OnMouseClicked!=null)
-				OnMouseClicked(this, e);
+			if (OnMouseClicked!=null) OnMouseClicked(this, e);
 		}
 
 		protected override void OnPaint(PaintEventArgs e)
@@ -59,9 +61,15 @@ namespace FunkyItemTrackerGUI
 
 		private void CharacterSlot_Leave(object sender, EventArgs e)
 		{
-			BackColor = Color.Transparent;
+			//if (!IsHighlighted) BackColor = Color.Transparent;
 		}
 
-	
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != this.GetType()) return false;
+			return Equals((CharacterSlot) obj);
+		}
 	}
 }

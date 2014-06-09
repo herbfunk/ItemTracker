@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
+using FunkyItemTracker.ItemTrackerGUI;
 using FunkyItemTracker.Objects;
 using Zeta.Bot;
 using Zeta.Game;
@@ -17,7 +19,7 @@ namespace FunkyItemTracker
 
 	class TabUi
 	{
-		private static Button _btnLogCharacterInventory, _btnLogCharacterEquipped, _btnLogCharacterStash;
+		private static Button _btnLogCharacterInventory, _btnLogCharacterEquipped, _btnLogCharacterStash, _btnShowGUI;
 
 		private const string Indent3Hang = "                       ";
 
@@ -36,6 +38,7 @@ namespace FunkyItemTracker
 						_btnLogCharacterInventory = new Button
 						{
 							Width = 120,
+							Height=20,
 							HorizontalAlignment = HorizontalAlignment.Left,
 							VerticalAlignment = VerticalAlignment.Top,
 							Margin = new Thickness(3),
@@ -46,6 +49,7 @@ namespace FunkyItemTracker
 						_btnLogCharacterEquipped = new Button
 						{
 							Width = 120,
+							Height = 20,
 							HorizontalAlignment = HorizontalAlignment.Left,
 							VerticalAlignment = VerticalAlignment.Top,
 							Margin = new Thickness(3),
@@ -56,12 +60,24 @@ namespace FunkyItemTracker
 						_btnLogCharacterStash = new Button
 						{
 							Width = 120,
+							Height = 20,
 							HorizontalAlignment = HorizontalAlignment.Left,
 							VerticalAlignment = VerticalAlignment.Top,
 							Margin = new Thickness(3),
 							Content = "Log Character Stash"
 						};
 						_btnLogCharacterStash.Click += BtnLogCharacterStashClick;
+
+						_btnShowGUI = new Button
+						{
+							Width = 120,
+							Height = 20,
+							HorizontalAlignment = HorizontalAlignment.Left,
+							VerticalAlignment = VerticalAlignment.Top,
+							Margin = new Thickness(3),
+							Content = "Show GUI"
+						};
+						_btnShowGUI.Click += BtnShowGUIClick;
 
 						UniformGrid uniformGrid = new UniformGrid
 						{
@@ -70,6 +86,7 @@ namespace FunkyItemTracker
 							MaxHeight = 180,
 						};
 
+						uniformGrid.Children.Add(_btnShowGUI);
 						uniformGrid.Children.Add(_btnLogCharacterInventory);
 						uniformGrid.Children.Add(_btnLogCharacterEquipped);
 						uniformGrid.Children.Add(_btnLogCharacterStash);
@@ -191,9 +208,16 @@ namespace FunkyItemTracker
 			return true;
 		}
 
+		private static void BtnShowGUIClick(object sender, RoutedEventArgs e)
+		{
+			frmItemTracker.thisForm = new frmItemTracker();
+			frmItemTracker.thisForm.ShowDialog();
+		}
 		private static void BtnLogCharacterInventoryClick(object sender, RoutedEventArgs e)
 		{
-			ItemTracker.Logging.WarnFormat("Please Wait -- Logging Character Inventory!");
+			MessageBoxResult confirmResult = MessageBox.Show("Do you wish to log Backpack Items?","Confirm Item Logging", MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Cancel);
+			if (confirmResult != MessageBoxResult.Yes)
+				return;
 
 			ZetaDia.Memory.ClearCache();
 			ZetaDia.Actors.Update();
@@ -222,7 +246,9 @@ namespace FunkyItemTracker
 		}
 		private static void BtnLogCharacterEquippedClick(object sender, RoutedEventArgs e)
 		{
-			ItemTracker.Logging.WarnFormat("Please Wait -- Logging Character Equippment!");
+			MessageBoxResult confirmResult = MessageBox.Show("Do you wish to log Equipped Items?", "Confirm Item Logging", MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Cancel);
+			if (confirmResult != MessageBoxResult.Yes)
+				return;
 
 			ZetaDia.Memory.ClearCache();
 			ZetaDia.Actors.Update();
@@ -251,7 +277,9 @@ namespace FunkyItemTracker
 		}
 		private static void BtnLogCharacterStashClick(object sender, RoutedEventArgs e)
 		{
-			ItemTracker.Logging.WarnFormat("Please Wait -- Logging Character Stash!");
+			MessageBoxResult confirmResult = MessageBox.Show("This may take up to a minute or longer to complete, do you wish to continue?", "Confirm Item Logging", MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Cancel);
+			if (confirmResult != MessageBoxResult.Yes)
+				return;
 
 			ZetaDia.Memory.ClearCache();
 			ZetaDia.Actors.Update();
@@ -265,7 +293,7 @@ namespace FunkyItemTracker
 			}
 			if (!IsAccountValid()) return;
 
-			
+
 		
 			List<TrackedItem> newItemList = new List<TrackedItem>();
 

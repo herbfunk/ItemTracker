@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Zeta.Game;
 
 namespace FunkyItemTracker.Objects
@@ -11,7 +12,28 @@ namespace FunkyItemTracker.Objects
 		public int Level { get; set; }
 		public ActorClass Class { get; set; }
 		public List<TrackedItem> InventoryItems { get; set; }
-		public List<TrackedItem> EquippedItems { get; set; } 
+		public List<TrackedItem> EquippedItems { get; set; }
+
+		public string GetImageIcon()
+		{
+			switch (Class)
+			{
+				case ActorClass.DemonHunter:
+					return "demonhunter_male.png";
+				case ActorClass.Barbarian:
+					return "barbarian_male.png";
+				case ActorClass.Wizard:
+					return "wizard_male.png";
+				case ActorClass.Witchdoctor:
+					return "witchdoctor_male.png";
+				case ActorClass.Monk:
+					return "monk_male.png";
+				case ActorClass.Crusader:
+					return "crusader_male.png";
+			}
+
+			return String.Empty;
+		}
 
 		public Character()
 		{

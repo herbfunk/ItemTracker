@@ -17,8 +17,8 @@ namespace FunkyItemTrackerGUI
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Form1.thisForm = new Form1();
-			Application.Run(Form1.thisForm);
+			frmItemTracker.thisForm = new frmItemTracker();
+			Application.Run(frmItemTracker.thisForm);
 		}
 	}
 }

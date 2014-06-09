@@ -15,7 +15,7 @@ namespace FunkyItemTracker
 		}
 
 		internal static string DemonBuddyPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-		internal static string ItemTrackerFolderPath
+		internal static string ItemTrackerOutPutFolderPath
 		{
 			get
 			{
@@ -24,12 +24,29 @@ namespace FunkyItemTracker
 				return folderpath;
 			}
 		}
+		internal static string ItemTrackerPluginFolderPath
+		{
+			get
+			{
+				string folderpath = Path.Combine(DemonBuddyPath, "Plugins", "FunkyItemTracker");
+				return folderpath;
+			}
+		}
+
+		internal static string ItemTrackerPluginGUIFolderPath
+		{
+			get
+			{
+				string folderpath = Path.Combine(ItemTrackerPluginFolderPath, "ItemTrackerGUI");
+				return folderpath;
+			}
+		}
 
 		internal static string ItemTrackerCurrentAccountFilePath
 		{
 			get
 			{
-				string folderpath = Path.Combine(ItemTrackerFolderPath, ItemTracker.AccountDetails.BattleTag + ".xml");
+				string folderpath = Path.Combine(ItemTrackerOutPutFolderPath, ItemTracker.AccountDetails.BattleTag + ".xml");
 				return folderpath;
 			}
 		}
